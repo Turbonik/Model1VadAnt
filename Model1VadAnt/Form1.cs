@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Model1VadAnt
 {
@@ -17,7 +18,7 @@ namespace Model1VadAnt
         public Form1()
         {
             InitializeComponent();
-            distribution = new Distribution(0.12345 );
+            distribution = new Distribution(0.12345);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -25,9 +26,9 @@ namespace Model1VadAnt
 
             LemerChart.Series[0].Points.Clear();
 
-            int amount = 100;
+            int amount = 1024;
             double[] data = distribution.GenerateRandomNumbers(amount);
-            int numIntervals = 5;
+            int numIntervals = 20;
 
             double min = 0;
             double max = 1;
@@ -35,19 +36,19 @@ namespace Model1VadAnt
             double intervalWidth = (max - min) / numIntervals;
             int[] counts = new int[numIntervals];
 
-           
+
             foreach (double value in data)
             {
                 int intervalIndex = (int)((value - min) / intervalWidth);
 
-                
+
                 if (intervalIndex >= 0 && intervalIndex < numIntervals)
                 {
                     counts[intervalIndex]++;
                 }
                 else
                 {
-              
+
                     Console.WriteLine($"Значение {value} вне диапазона."); //Это сообщение будет в выводе Visual Studio.
                 }
             }
@@ -56,6 +57,10 @@ namespace Model1VadAnt
                 double intervalStart = min + i * intervalWidth;
                 LemerChart.Series[0].Points.AddXY(intervalStart, counts[i]);  // X - начало интервала, Y - частота
             }
+            
+            text.Text = SeriesMethod.ScrutiniseSequence(data, amount);
         }
+
+       
     }
 }

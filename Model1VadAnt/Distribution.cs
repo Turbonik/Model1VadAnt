@@ -10,7 +10,7 @@ namespace Model1VadAnt
     {
 
         private static double _seed = 0.12345;
-        private const double multiplier = 3456;
+        private const double multiplier = 1111;        
 
         public Distribution(double seed)
         {
@@ -19,7 +19,7 @@ namespace Model1VadAnt
 
         public double NextDouble()
         {
-            _seed = _seed * multiplier -Math.Truncate(_seed * multiplier);   
+            _seed = _seed * multiplier - Math.Truncate(_seed * multiplier);   
             return _seed;
         }
         public double[] GenerateRandomNumbers(int count)
